@@ -85,12 +85,13 @@ constructor(props) {
         <button onClick={() => {
           this.setState({ showCockpit: false });
           }}>Remove Cockpit</button>
-        {this.state.showCockpit ? <Cockpit
+        {this.state.showCockpit ? (
+        <Cockpit
           title={this.props.appTitle}
           showPersons={this.state.showPersons}
-          persons={this.state.persons}
+          personsLength={this.state.persons.length}
           clicked={this.togglePersonHandler} />
-        : null}
+        ) : null}
         {persons}
       </div>
     );
