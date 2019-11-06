@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent } from 'react'; //PureComponent does a full props check for you, no need for checks commented out below
 import Person from './Person/index'
 
 
