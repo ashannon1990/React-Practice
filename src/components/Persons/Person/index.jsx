@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import classes from './style.css';
+// import classes from './style.css';
 // import Aux from '../../../hoc/Auxiliary'
 
 class Person extends Component {
