@@ -6,11 +6,11 @@ import withClass from '../hoc/withClass';
 import Aux from '../hoc/Auxiliary'
 
 class App extends Component {
-constructor(props) {
-  super(props);
-  console.log('[App.js] constructor');
-  
-}
+  constructor(props) {
+    super(props);
+    console.log('[App.js] constructor');
+
+  }
 
   state = {
     persons: [
@@ -20,7 +20,8 @@ constructor(props) {
     ],
     otherState: 'some other value',
     showPersons: false,
-    showCockpit: true
+    showCockpit: true,
+    changeCounter: 0
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -59,7 +60,12 @@ constructor(props) {
     const persons = [...this.state.persons];
     persons[personIndex] = person;
 
-    this.setState({ persons: persons });
+    this.setState((prevState, props) => {
+      return {
+        persons: persons,
+        changeCounter: prevState.changeCounter + 1
+      }
+    });
   }
 
   togglePersonHandler = () => {
@@ -69,7 +75,7 @@ constructor(props) {
 
   render() {
     console.log('[App.js] render');
-    
+
 
     let persons = null;
     if (this.state.showPersons) {
@@ -86,13 +92,13 @@ constructor(props) {
       <Aux >
         <button onClick={() => {
           this.setState({ showCockpit: false });
-          }}>Remove Cockpit</button>
+        }}>Remove Cockpit</button>
         {this.state.showCockpit ? (
-        <Cockpit
-          title={this.props.appTitle}
-          showPersons={this.state.showPersons}
-          personsLength={this.state.persons.length}
-          clicked={this.togglePersonHandler} />
+          <Cockpit
+            title={this.props.appTitle}
+            showPersons={this.state.showPersons}
+            personsLength={this.state.persons.length}
+            clicked={this.togglePersonHandler} />
         ) : null}
         {persons}
       </Aux>
