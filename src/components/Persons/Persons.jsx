@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react'; //PureComponent does a full props check for you, no need for checks commented out below
 import Person from './Person/index';
+import AuthContext from '../../context/auth-context'
 
 
 class Persons extends PureComponent {
@@ -41,7 +42,9 @@ class Persons extends PureComponent {
 
   render() {
     console.log('[Persons.js] rendoring...');
-    return this.props.persons.map((person, index) => {
+    return (
+    <AuthContext.Consumer>
+    {() => this.props.persons.map((person, index) => {
       return (
         <Person
           click={() => this.props.clicked(index)}
@@ -51,8 +54,9 @@ class Persons extends PureComponent {
           changed={(event) => this.props.changed(event, person.id)}
         />
       )
-    })
-  }
+    })}
+    </AuthContext.Consumer>
+    )}
 }
 
 
